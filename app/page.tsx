@@ -1,69 +1,94 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState } from "react";
+import { Currency } from "@/lib/utils";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import TrustMarquee from "@/components/TrustMarquee";
+import ProjectVault from "@/components/ProjectVault";
+import AuditTool from "@/components/AuditTool";
+import Services from "@/components/Services";
+import InternationalOS from "@/components/InternationalOS";
+import Process from "@/components/Process";
+import ScopeEstimator from "@/components/ScopeEstimator";
+import Pricing from "@/components/Pricing";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+import BookingModal from "@/components/BookingModal";
 
 export default function Home() {
+  const [currency, setCurrency] = useState<Currency>("USD");
+  const [bookingOpen, setBookingOpen] = useState(false);
+
+  const handleOpenBooking = () => {
+    setBookingOpen(true);
+  };
+
+  const handleCloseBooking = () => {
+    setBookingOpen(false);
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="min-h-screen bg-[#f1efe6] text-[#17162a] flex flex-col font-sans selection:bg-[#e8a33d] selection:text-[#14131f]">
+      {/* 1. Global Navigation with Timezone HUD & Currency Switcher */}
+      <Navbar
+        currentCurrency={currency}
+        onCurrencyChange={setCurrency}
+        onOpenBooking={handleOpenBooking}
+      />
+
+      {/* Main Orchestrated Flow */}
+      <main className="flex-grow">
+        {/* 2. High-Conviction Hero Section (Dark Signature Section) */}
+        <Hero onOpenBooking={handleOpenBooking} />
+
+        {/* 3. Verified Impact & Global Client Hubs (Light Section) */}
+        <TrustMarquee />
+
+        {/* 4. Strategic Service Pillars (Light Section) */}
+        <Services onOpenBooking={handleOpenBooking} />
+
+        {/* 5. Interactive Visual Project Vault - Selected Work (Dark Signature Section) */}
+        <ProjectVault onOpenBooking={handleOpenBooking} />
+
+        {/* 6. 30-Second Interactive Live Website Audit Tool (Light Section) */}
+        <AuditTool onOpenBooking={handleOpenBooking} />
+
+        {/* 7. The 4-Phase Delivery Sprint / Process (Light Section) */}
+        <Process onOpenBooking={handleOpenBooking} />
+
+        {/* 8. The International Friction-Free Operating System (Light Warm Accent Section) */}
+        <InternationalOS />
+
+        {/* 9. Verified International Founder Testimonials (Light Section) */}
+        <Testimonials />
+
+        {/* 10. Interactive Sprint Scope & Investment Estimator (Light Section) */}
+        <ScopeEstimator
+          currentCurrency={currency}
+          onOpenBooking={handleOpenBooking}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* 11. Transparent Sprint Pricing & Inclusions (Light Section with Featured Dark Card) */}
+        <Pricing
+          currentCurrency={currency}
+          onOpenBooking={handleOpenBooking}
+        />
+
+        {/* 12. Objection Handling FAQ Accordion (Light Section) */}
+        <FAQ onOpenBooking={handleOpenBooking} />
+
+        {/* 13. Conversion Hub, Direct Channels & Intake Form (Dark Signature Section) */}
+        <ContactSection onOpenBooking={handleOpenBooking} />
       </main>
+
+      {/* 14. Studio Footer (Dark Signature Footer) */}
+      <Footer />
+
+      {/* 15. Interactive 15-Minute Strategy Call Scheduler Modal */}
+      <BookingModal isOpen={bookingOpen} onClose={handleCloseBooking} />
     </div>
   );
 }
